@@ -26,11 +26,18 @@ jobs:
           npm install
           npm run build
 
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5C15E12975B44A7E98A8B9A8D84F030B }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6753AC0CC2A34B928A4F2244AAB76308 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_16A0E6CBE6DE48C4BA4B3A133BF77BC5 }}
+
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'didik-medium'
+          app-name: 'reactopenai'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3F30F0A6 }}
           package: .
