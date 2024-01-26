@@ -35,5 +35,8 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+#Exclude generated content
 
+/generated/*
+!/generated/.gitkeep
 

@@ -34,10 +34,9 @@ export const translateUseCase =async (openai:OpenAI, options:Options) => {
           
 
 
-    console.log(completion);
+
     
-    const resPonse = completion.choices[0].message.content; 
-    
+    const resPonse = completion.choices[0].message.content;     
     return {message:  resPonse};
 
     //  return {
