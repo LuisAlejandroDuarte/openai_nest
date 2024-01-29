@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
 import { GptService } from './gpt.service';
-import { OrthographyDto, ProsConsDiscusserDto, TextToAudiooDto, TranslateDto } from './dtos';
+import { ImageGenerationDTO, ImageVariationDTO, OrthographyDto, ProsConsDiscusserDto, TextToAudiooDto, TranslateDto } from './dtos';
 import { type Response } from 'express';
 
 
@@ -71,5 +71,29 @@ export class GptController {
        res.sendFile(filePath);
     }
 
+    @Post('image-generation')
+    async imageGeneration(
+      @Body() imageGenerationDto: ImageGenerationDTO)
+      {
+        console.log({imageGenerationDto});
+        return await this.gptService.imageGeneration(imageGenerationDto);
+      }
+ 
+  @Get('image-generation/:fileId')
+  async imageGenerationGetter(
+    @Res() res:Response,
+    @Param('fileId') fileId:string)
+    {
+      const filePath =await this.gptService.textToImageGetter(fileId);
+      res.status(HttpStatus.OK);
+      res.sendFile(filePath);
+    }      
 
+  @Post('image-variation')
+  async imageVariation(
+    @Body() imageVariationDTO: ImageVariationDTO)
+    {
+      console.log({imageVariationDTO});
+      return await this.gptService.generateImageVariation(imageVariationDTO);
+    }        
 }
